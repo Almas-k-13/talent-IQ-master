@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Sparkles, Video, Code2, ArrowRight } from "lucide-react";
+import { Sparkles, Video, Code2, ArrowRight} from "lucide-react";
+import { Link } from "react-router";
 
 function WelcomeSection({ onCreateSession }) {
   return (
@@ -49,9 +50,12 @@ function WelcomeSection({ onCreateSession }) {
                   />
                 </button>
 
-                <button className="px-7 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-200 text-white font-semibold">
+                <Link
+                  to="/problems"
+                  className="px-7 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-200 text-white font-semibold inline-flex items-center justify-center"
+                >
                   Explore Problems
-                </button>
+                </Link>
               </div>
 
               {/* Stats */}

@@ -1,72 +1,162 @@
+import {
+  BookOpenIcon,
+  ChevronDownIcon,
+  Code2Icon,
+  SparklesIcon,
+} from "lucide-react";
 import { getDifficultyBadgeClass } from "../lib/utils";
-function ProblemDescription({ problem, currentProblemId, onProblemChange, allProblems }) {
-  return (
-    <div className="h-full overflow-y-auto bg-base-200">
-      {/* HEADER SECTION */}
-      <div className="p-6 bg-base-100 border-b border-base-300">
-        <div className="flex items-start justify-between mb-3">
-          <h1 className="text-3xl font-bold text-base-content">{problem.title}</h1>
-          <span className={`badge ${getDifficultyBadgeClass(problem.difficulty)}`}>
-            {problem.difficulty}
-          </span>
-        </div>
-        <p className="text-base-content/60">{problem.category}</p>
 
-        {/* Problem selector */}
-        <div className="mt-4">
-          <select
-            className="select select-sm w-full"
-            value={currentProblemId}
-            onChange={(e) => onProblemChange(e.target.value)}
-          >
-            {allProblems.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.title} - {p.difficulty}
-              </option>
-            ))}
-          </select>
+function ProblemDescription({
+  problem,
+  currentProblemId,
+  onProblemChange,
+  allProblems,
+}) {
+  return (
+    <div className="h-full overflow-y-auto bg-[#0b1120] text-white custom-scrollbar">
+      {/* HEADER */}
+      <div className="sticky top-0 z-20 backdrop-blur-xl bg-[#0b1120]/90 border-b border-white/10">
+        <div className="p-6">
+          <div className="flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/20 bg-green-500/10 text-green-400 text-xs font-semibold mb-4">
+                <SparklesIcon className="size-3.5" />
+                Realtime Coding Interview
+              </div>
+
+              <h1 className="text-4xl font-black tracking-tight mb-2">
+                {problem.title}
+              </h1>
+
+              <div className="flex items-center gap-3 flex-wrap">
+                <p className="text-white/60 font-medium">
+                  {problem.category}
+                </p>
+
+                <span
+                  className={`badge border-0 font-semibold ${getDifficultyBadgeClass(
+                    problem.difficulty
+                  )}`}
+                >
+                  {problem.difficulty}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* SELECT */}
+          <div className="mt-6 relative">
+            <select
+              className="w-full bg-[#111827] border border-white/10 hover:border-green-500/40 focus:border-green-400 rounded-2xl px-5 py-4 text-white outline-none transition-all appearance-none font-medium"
+              value={currentProblemId}
+              onChange={(e) => onProblemChange(e.target.value)}
+            >
+              {allProblems.map((p) => (
+                <option
+                  key={p.id}
+                  value={p.id}
+                  className="bg-[#111827] text-white"
+                >
+                  {p.title} - {p.difficulty}
+                </option>
+              ))}
+            </select>
+
+            <ChevronDownIcon className="size-5 absolute right-5 top-1/2 -translate-y-1/2 text-white/50 pointer-events-none" />
+          </div>
         </div>
       </div>
 
+      {/* BODY */}
       <div className="p-6 space-y-6">
-        {/* PROBLEM DESC */}
-        <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
-          <h2 className="text-xl font-bold text-base-content">Description</h2>
+        {/* DESCRIPTION */}
+        <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827] to-[#0f172a] overflow-hidden">
+          <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
+            <div className="size-10 rounded-2xl bg-green-500/10 flex items-center justify-center">
+              <BookOpenIcon className="size-5 text-green-400" />
+            </div>
 
-          <div className="space-y-3 text-base leading-relaxed">
-            <p className="text-base-content/90">{problem.description.text}</p>
-            {problem.description.notes.map((note, idx) => (
-              <p key={idx} className="text-base-content/90">
-                {note}
+            <div>
+              <h2 className="text-xl font-bold">Problem Description</h2>
+              <p className="text-sm text-white/50">
+                Understand the coding challenge carefully
               </p>
+            </div>
+          </div>
+
+          <div className="p-6 space-y-5 leading-8 text-white/80">
+            <p className="text-lg">{problem.description.text}</p>
+
+            {problem.description.notes.map((note, idx) => (
+              <div
+                key={idx}
+                className="p-4 rounded-2xl bg-white/[0.03] border border-white/5"
+              >
+                {note}
+              </div>
             ))}
           </div>
         </div>
 
-        {/* EXAMPLES SECTION */}
-        <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
-          <h2 className="text-xl font-bold mb-4 text-base-content">Examples</h2>
-          <div className="space-y-4">
+        {/* EXAMPLES */}
+        <div className="rounded-3xl border border-white/10 bg-[#111827] overflow-hidden">
+          <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
+            <div className="size-10 rounded-2xl bg-cyan-500/10 flex items-center justify-center">
+              <Code2Icon className="size-5 text-cyan-400" />
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold">Examples</h2>
+              <p className="text-sm text-white/50">
+                Sample test cases and outputs
+              </p>
+            </div>
+          </div>
+
+          <div className="p-6 space-y-5">
             {problem.examples.map((example, idx) => (
-              <div key={idx}>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="badge badge-sm">{idx + 1}</span>
-                  <p className="font-semibold text-base-content">Example {idx + 1}</p>
+              <div
+                key={idx}
+                className="rounded-2xl border border-white/10 overflow-hidden bg-[#0f172a]"
+              >
+                <div className="px-5 py-3 border-b border-white/10 flex items-center gap-3">
+                  <div className="size-7 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-sm font-bold">
+                    {idx + 1}
+                  </div>
+
+                  <h3 className="font-semibold">
+                    Example {idx + 1}
+                  </h3>
                 </div>
-                <div className="bg-base-200 rounded-lg p-4 font-mono text-sm space-y-1.5">
-                  <div className="flex gap-2">
-                    <span className="text-primary font-bold min-w-[70px]">Input:</span>
-                    <span>{example.input}</span>
+
+                <div className="p-5 space-y-4 font-mono text-sm">
+                  <div>
+                    <span className="text-cyan-400 font-bold">
+                      Input:
+                    </span>
+                    <pre className="mt-2 whitespace-pre-wrap text-white/80">
+                      {example.input}
+                    </pre>
                   </div>
-                  <div className="flex gap-2">
-                    <span className="text-secondary font-bold min-w-[70px]">Output:</span>
-                    <span>{example.output}</span>
+
+                  <div>
+                    <span className="text-green-400 font-bold">
+                      Output:
+                    </span>
+                    <pre className="mt-2 whitespace-pre-wrap text-white/80">
+                      {example.output}
+                    </pre>
                   </div>
+
                   {example.explanation && (
-                    <div className="pt-2 border-t border-base-300 mt-2">
-                      <span className="text-base-content/60 font-sans text-xs">
-                        <span className="font-semibold">Explanation:</span> {example.explanation}
+                    <div className="pt-4 border-t border-white/10">
+                      <span className="text-pink-400 font-bold">
+                        Explanation:
                       </span>
+
+                      <p className="mt-2 text-white/70 leading-7 font-sans">
+                        {example.explanation}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -76,16 +166,28 @@ function ProblemDescription({ problem, currentProblemId, onProblemChange, allPro
         </div>
 
         {/* CONSTRAINTS */}
-        <div className="bg-base-100 rounded-xl shadow-sm p-5 border border-base-300">
-          <h2 className="text-xl font-bold mb-4 text-base-content">Constraints</h2>
-          <ul className="space-y-2 text-base-content/90">
+        <div className="rounded-3xl border border-white/10 bg-[#111827] overflow-hidden mb-10">
+          <div className="px-6 py-5 border-b border-white/10">
+            <h2 className="text-xl font-bold">Constraints</h2>
+            <p className="text-sm text-white/50 mt-1">
+              Important limits for the solution
+            </p>
+          </div>
+
+          <div className="p-6 space-y-3">
             {problem.constraints.map((constraint, idx) => (
-              <li key={idx} className="flex gap-2">
-                <span className="text-primary">•</span>
-                <code className="text-sm">{constraint}</code>
-              </li>
+              <div
+                key={idx}
+                className="flex items-start gap-3 p-4 rounded-2xl bg-[#0f172a] border border-white/5"
+              >
+                <div className="size-2 rounded-full bg-green-400 mt-2" />
+
+                <code className="text-white/80 text-sm break-all">
+                  {constraint}
+                </code>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>
