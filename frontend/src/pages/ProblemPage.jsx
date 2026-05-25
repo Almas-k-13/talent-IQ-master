@@ -107,10 +107,14 @@ function ProblemPage() {
   };
 
   return (
-    <div className="h-screen bg-base-100 flex flex-col">
+    <div className="min-h-screen bg-[#0b1120] text-white flex flex-col relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-green-500/10 blur-[120px] rounded-full" />
+
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full" />
       <Navbar />
 
-      <div className="flex-1">
+      <div className="flex-1 relative z-10 overflow-hidden">
         <PanelGroup direction="horizontal">
           {/* left panel- problem desc */}
           <Panel defaultSize={40} minSize={30}>
@@ -122,10 +126,10 @@ function ProblemPage() {
             />
           </Panel>
 
-          <PanelResizeHandle className="w-2 bg-base-300 hover:bg-primary transition-colors cursor-col-resize" />
+          <PanelResizeHandle className="w-2 bg-white/10 hover:bg-green-400/40 transition-colors cursor-col-resize" />
 
           {/* right panel- code editor & output */}
-          <Panel defaultSize={60} minSize={30}>
+          <Panel defaultSize={60} minSize={35}>
             <PanelGroup direction="vertical">
               {/* Top panel - Code editor */}
               <Panel defaultSize={70} minSize={30}>
@@ -139,11 +143,11 @@ function ProblemPage() {
                 />
               </Panel>
 
-              <PanelResizeHandle className="h-2 bg-base-300 hover:bg-primary transition-colors cursor-row-resize" />
+              <PanelResizeHandle className="h-2 bg-white/10 hover:bg-green-400/40 transition-colors cursor-row-resize" />
 
               {/* Bottom panel - Output Panel*/}
 
-              <Panel defaultSize={30} minSize={30}>
+              <Panel defaultSize={25} minSize={20}>
                 <OutputPanel output={output} />
               </Panel>
             </PanelGroup>
