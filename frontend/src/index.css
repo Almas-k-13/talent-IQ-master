@@ -1,12 +1,37 @@
 @import "tailwindcss";
-@plugin "daisyui" {
-  themes: all;
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
 }
 
-/* Add cursor pointer to buttons by default - this is coming from tailwind docs */
-@layer base {
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    cursor: pointer;
-  }
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #0b1120;
+  color: white;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff9d;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
 }
