@@ -9,7 +9,7 @@ import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 
 import chatRoutes from "./routes/chatRoutes.js";
-import sessionRoutes from "./routes/sessionRoute.js";
+import sessionRoutes from "./routes/sessionRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 import {
   createSession,
@@ -31,6 +31,7 @@ const allowedOrigins = new Set([
   corsOrigin,
   "http://localhost:5173",
   "http://localhost:5174",
+  "https://talent-iq-master-self.vercel.app",
 ]);
 
 app.use(
@@ -41,7 +42,7 @@ app.use(
       if (allowedOrigins.has(origin)) return cb(null, true);
       return cb(new Error(`CORS blocked origin: ${origin}`));
     },
-    credentials: true,
+    credentials: false,
   })
 );
 
