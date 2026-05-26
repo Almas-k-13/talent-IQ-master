@@ -26,26 +26,13 @@ app.use(express.json());
 
 // CORS (allow localhost dev)
 // Frontend might run on different ports (5173 vs 5174). Allow both.
-const corsOrigin = ENV.CLIENT_URL || "http://localhost:5173";
-const allowedOrigins = new Set([
-  corsOrigin,
-  "http://localhost:5173",
-  "http://localhost:5174",
-  "https://talent-iq-master-self.vercel.app",
-]);
-
-app.use(
+capp.use(
   cors({
-    origin: (origin, cb) => {
-      // allow non-browser requests (no origin header)
-      if (!origin) return cb(null, true);
-      if (allowedOrigins.has(origin)) return cb(null, true);
-      return cb(new Error(`CORS blocked origin: ${origin}`));
-    },
-    credentials: false,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
 
 /* Request logging (useful to debug 404s / wrong base URLs)
    Logs: method, url, status, duration(ms)
