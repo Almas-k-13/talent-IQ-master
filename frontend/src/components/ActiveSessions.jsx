@@ -8,7 +8,7 @@ import {
   Video,
 } from "lucide-react";
 
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function ActiveSessions({

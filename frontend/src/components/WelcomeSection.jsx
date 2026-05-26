@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Sparkles, Video, Code2, ArrowRight} from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 function WelcomeSection({ onCreateSession }) {
   return (

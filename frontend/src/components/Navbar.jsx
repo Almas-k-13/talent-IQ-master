@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 import { UserButton } from "@clerk/clerk-react";
 import { LayoutDashboard, Code2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
