@@ -26,7 +26,7 @@ app.use(express.json());
 
 // CORS (allow localhost dev)
 // Frontend might run on different ports (5173 vs 5174). Allow both.
-capp.use(
+app.use(
   cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
