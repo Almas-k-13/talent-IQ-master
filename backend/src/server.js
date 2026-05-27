@@ -10,7 +10,7 @@ import { connectDB } from "./lib/db.js";
 import { inngest, functions } from "./lib/inngest.js";
 
 import chatRoutes from "./routes/chatRoutes.js";
-import sessionRoutes from "./routes/sessionRoutes.js"; // ✅ FIXED
+import sessionRoutes from "./routes/sessionRoutes.js";
 import videoRoutes from "./routes/videoRoutes.js";
 
 dotenv.config();
@@ -18,35 +18,35 @@ dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 
-
-
+// CORS
 app.use(
   cors({
     origin: "https://talent-iq-master-bay.vercel.app",
     credentials: true,
   })
 );
+
+// BODY PARSER
 app.use(express.json());
 
-// Clerk middleware
+// CLERK
 app.use(clerkMiddleware());
 
-// Debug request logs
+// REQUEST LOGGER
 app.use((req, res, next) => {
   console.log(`[REQ] ${req.method} ${req.originalUrl}`);
   next();
 });
 
-// TEST ROUTE
+// ROOT ROUTE
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Backend Running 🚀",
+  });
+});
 
-
-// API ROUTES
-app.use("/api/inngest", serve({ client: inngest, functions }));
-app.use("/api/chat", chatRoutes);
-app.use("/api/video", videoRoutes);
-app.use("/api/sessions", sessionRoutes);
-
-// HEALTH CHECK
+// HEALTH
 app.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
@@ -54,7 +54,22 @@ app.get("/health", (req, res) => {
   });
 });
 
-// 404 handler
+// API ROUTES
+app.use("/api/inngest", serve({ client: inngest, functions }));
+app.use("/api/chat", chatRoutes);
+app.use("/api/video", videoRoutes);
+app.use("/api/sessions", sessionRoutes);
+
+// FRONTEND SERVE
+if (ENV.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+  });
+}
+
+// 404
 app.use((req, res) => {
   console.log("404 ROUTE HIT =>", req.originalUrl);
 
@@ -65,7 +80,7 @@ app.use((req, res) => {
   });
 });
 
-// Error handler
+// ERROR HANDLER
 app.use((err, req, res, next) => {
   console.error("[SERVER ERROR]", err);
 
@@ -74,15 +89,6 @@ app.use((err, req, res, next) => {
     message: err.message || "Internal Server Error",
   });
 });
-
-// Production frontend serve
-if (ENV.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-  });
-}
 
 const PORT = ENV.PORT || 3000;
 
