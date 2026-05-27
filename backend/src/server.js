@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 const __dirname = path.resolve();
 
-app.use(express.json());
+
 
 app.use(
   cors({
@@ -26,6 +26,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(express.json());
 
 // Clerk middleware
 app.use(clerkMiddleware());

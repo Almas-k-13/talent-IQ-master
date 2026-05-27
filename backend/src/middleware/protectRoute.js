@@ -1,6 +1,7 @@
 import { requireAuth } from "@clerk/express";
 import User from "../models/User.js";
 import { ENV } from "../lib/env.js";
+console.log("PROTECT ROUTE FILE LOADED");
 
 const fetchClerkUser = async (clerkId) => {
   if (!ENV.CLERK_SECRET_KEY) {
@@ -44,6 +45,7 @@ const mapClerkToMongoUser = (clerkUser) => {
 export const protectRoute = [
   requireAuth(),
   async (req, res, next) => {
+     console.log("PROTECT ROUTE HIT");
     try {
       const clerk = typeof req.auth === "function" ? req.auth() : null;
       const clerkId = clerk?.userId;
