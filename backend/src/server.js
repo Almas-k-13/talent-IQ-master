@@ -28,9 +28,8 @@ app.use(express.json());
 // Frontend might run on different ports (5173 vs 5174). Allow both.
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: "https://talent-iq-master-bay.vercel.app",
+    credentials: true,
   })
 );
 
