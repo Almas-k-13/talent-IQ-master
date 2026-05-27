@@ -96,12 +96,7 @@ app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
 });
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Backend Running 🚀",
-  });
-});
+
 
 // Debug helper to confirm server is alive and core route prefixes exist.
 app.get("/debug/routes", (req, res) => {
@@ -152,12 +147,7 @@ if (ENV.NODE_ENV === "production") {
 });
 }
 
-app.get("/debug/ping", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "pong",
-  });
-});
+
 
 process.on("uncaughtException", (err) => {
   // eslint-disable-next-line no-console
