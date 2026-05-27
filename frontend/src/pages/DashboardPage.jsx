@@ -14,6 +14,7 @@ import {
   useCreateSession,
   useMyRecentSessions,
 } from "../hooks/useSessions";
+import toast from "react-hot-toast";
 
 import Navbar from "../components/Navbar";
 import WelcomeSection from "../components/WelcomeSection";
