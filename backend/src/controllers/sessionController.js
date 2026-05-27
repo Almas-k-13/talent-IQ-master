@@ -1,6 +1,6 @@
 import { chatClient, streamClient } from "../lib/stream.js";
 import Session from "../models/Session.js";
-
+console.log("SESSION CONTROLLER FILE LOADED");
 export async function createSession(req, res) {
   try {
     console.log("[SESSION CREATE HIT]"

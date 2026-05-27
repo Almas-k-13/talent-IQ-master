@@ -10,6 +10,7 @@ import {
 } from "../controllers/sessionController.js";
 
 const router = express.Router();
+console.log("SESSION ROUTES FILE LOADED");
 
 router.post("/", protectRoute, createSession); // backwards compatible
 router.post("/create", protectRoute, createSession);

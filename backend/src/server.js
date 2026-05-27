@@ -37,12 +37,7 @@ app.use((req, res, next) => {
 });
 
 // TEST ROUTE
-app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Backend Running 🚀",
-  });
-});
+
 
 // API ROUTES
 app.use("/api/inngest", serve({ client: inngest, functions }));
@@ -60,6 +55,8 @@ app.get("/health", (req, res) => {
 
 // 404 handler
 app.use((req, res) => {
+  console.log("404 ROUTE HIT =>", req.originalUrl);
+
   res.status(404).json({
     success: false,
     message: "Not Found",
