@@ -8,22 +8,17 @@ const axiosInstance = axios.create({
   },
 });
 
-// REQUEST DEBUG
-axiosInstance.interceptors.request.use(
-  (config) => {
-    console.log("🚀 API REQUEST =>", {
-      method: config.method,
-      fullURL: `${config.baseURL}${config.url}`,
-    });
+// DEBUG
+axiosInstance.interceptors.request.use((config) => {
+  console.log("🚀 FINAL API URL =>", {
+    method: config.method,
+    url: config.url,
+    fullURL: `${config.baseURL}${config.url}`,
+  });
 
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+  return config;
+});
 
-// RESPONSE DEBUG
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log("✅ API RESPONSE =>", response.config.url, response.data);
@@ -31,9 +26,9 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     console.log("❌ API ERROR =>", {
-      url: error?.config?.url,
-      fullURL: `${error?.config?.baseURL}${error?.config?.url}`,
-      response: error?.response?.data,
+      url: error.config?.url,
+      fullURL: `${error.config?.baseURL}${error.config?.url}`,
+      response: error.response?.data,
     });
 
     return Promise.reject(error);
