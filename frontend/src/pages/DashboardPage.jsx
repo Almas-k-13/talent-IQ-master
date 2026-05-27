@@ -54,9 +54,19 @@ function DashboardPage() {
       },
       {
         onSuccess: (data) => {
-          setShowCreateModal(false);
-          navigate(`/session/${data.session._id}`);
-        },
+          console.log("SESSION RESPONSE", data);
+
+          const sessionId =
+            data?._id ||
+            data?.session?._id;
+
+          if (!sessionId) {
+            toast.error("Session ID missing");
+            return;
+          }
+
+          navigate(`/session/${sessionId}`);
+        }
       }
     );
   };
