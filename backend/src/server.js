@@ -1,5 +1,4 @@
 import express from "express";
-import path from "path";
 import cors from "cors";
 import dotenv from "dotenv";
 import { serve } from "inngest/express";
@@ -16,9 +15,9 @@ import videoRoutes from "./routes/videoRoutes.js";
 dotenv.config();
 
 const app = express();
-const __dirname = path.resolve();
 
-// CORS
+// ================= MIDDLEWARE =================
+
 app.use(
   cors({
     origin: "https://talent-iq-master-bay.vercel.app",
@@ -26,42 +25,47 @@ app.use(
   })
 );
 
-// BODY PARSER
 app.use(express.json());
 
-// CLERK
 app.use(clerkMiddleware());
 
-// REQUEST LOGGER
+// ================= LOGGER =================
+
 app.use((req, res, next) => {
   console.log(`[REQ] ${req.method} ${req.originalUrl}`);
   next();
 });
 
+// ================= HEALTH =================
 
-
-// HEALTH
 app.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
-    message: "API Running",
+    message: "API Running 🚀",
   });
 });
 
-// API ROUTES
+// ================= API ROUTES =================
+
 app.use("/api/inngest", serve({ client: inngest, functions }));
+
 app.use("/api/chat", chatRoutes);
+
 app.use("/api/video", videoRoutes);
+
 app.use("/api/sessions", sessionRoutes);
 
+// ================= ROOT =================
+
 app.get("/", (req, res) => {
-  res.json({
+  res.status(200).json({
     success: true,
-    message: "Backend Root Working 🚀",
+    message: "Backend Working 🚀",
   });
 });
 
-// 404
+// ================= 404 =================
+
 app.use((req, res) => {
   console.log("404 ROUTE HIT =>", req.originalUrl);
 
@@ -72,7 +76,8 @@ app.use((req, res) => {
   });
 });
 
-// ERROR HANDLER
+// ================= ERROR HANDLER =================
+
 app.use((err, req, res, next) => {
   console.error("[SERVER ERROR]", err);
 
@@ -81,6 +86,8 @@ app.use((err, req, res, next) => {
     message: err.message || "Internal Server Error",
   });
 });
+
+// ================= START SERVER =================
 
 const PORT = ENV.PORT || 3000;
 
