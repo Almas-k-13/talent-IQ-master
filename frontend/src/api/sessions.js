@@ -1,7 +1,9 @@
 import axiosInstance from "../lib/axios";
 
 export const sessionApi = {
+  
   createSession: async (data) => {
+    console.log("SESSION API FILE LOADED");
     // backend supports /api/sessions/create (and keeps /api/sessions/ for backwards compatibility)
     const response = await axiosInstance.post("/sessions/create", data);
     return response.data;
@@ -9,6 +11,7 @@ export const sessionApi = {
 
 
   getActiveSessions: async () => {
+    console.log("CALLING => /sessions/active");
     const response = await axiosInstance.get("/sessions/active");
     return response.data;
   },
