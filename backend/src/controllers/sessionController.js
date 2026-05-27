@@ -3,12 +3,13 @@ import Session from "../models/Session.js";
 
 export async function createSession(req, res) {
   try {
-    console.log("[SESSION CREATE HIT]", {
-      path: req.originalUrl,
-      body: req.body,
-      hasAuthUser: Boolean(req?.user?._id),
-      clerkId: req?.user?.clerkId ? String(req.user.clerkId) : null,
-    });
+    console.log("[SESSION CREATE HIT]"
+      , {
+        path: req.originalUrl,
+        body: req.body,
+        hasAuthUser: Boolean(req?.user?._id),
+        clerkId: req?.user?.clerkId ? String(req.user.clerkId) : null,
+      });
 
     const { problem, difficulty } = req.body;
 
