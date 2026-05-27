@@ -96,6 +96,13 @@ app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
 });
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Backend Running 🚀",
+  });
+});
+
 // Debug helper to confirm server is alive and core route prefixes exist.
 app.get("/debug/routes", (req, res) => {
   res.json({
@@ -140,9 +147,9 @@ app.use((err, _req, res, _next) => {
 if (ENV.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/{*any}", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
+  app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 }
 
 app.get("/debug/ping", (req, res) => {
