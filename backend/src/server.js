@@ -92,6 +92,7 @@ app.get("/api/sessions/active", protectRoute, getActiveSessions);
 app.get("/api/sessions/my-recent", protectRoute, getMyRecentSessions);
 app.post("/api/sessions/create", protectRoute, createSession);
 
+
 app.get("/health", (req, res) => {
   res.status(200).json({ msg: "api is up and running" });
 });
