@@ -13,7 +13,7 @@ console.log("🔥 SESSION ROUTES FILE LOADED");
 const router = express.Router();
 
 router.post("/", protectRoute, createSession); // backwards compatible
-router.post("/create", protectRoute, createSession);
+router.post("/create", createSession);
 router.get("/active", protectRoute, getActiveSessions);
 
 router.get("/my-recent", protectRoute, getMyRecentSessions);
