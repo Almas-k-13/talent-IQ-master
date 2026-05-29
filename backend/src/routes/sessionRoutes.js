@@ -8,9 +8,9 @@ import {
   getSessionById,
   joinSession,
 } from "../controllers/sessionController.js";
+console.log("🔥 SESSION ROUTES FILE LOADED");
 
 const router = express.Router();
-console.log("SESSION ROUTES FILE LOADED");
 
 router.post("/", protectRoute, createSession); // backwards compatible
 router.post("/create", protectRoute, createSession);

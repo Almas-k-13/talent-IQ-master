@@ -10,6 +10,7 @@ import { inngest, functions } from "./lib/inngest.js";
 
 import chatRoutes from "./routes/chatRoutes.js";
 import sessionRoutes from "./routes/sessionRoutes.js";
+console.log("🔥 IMPORT SUCCESS");
 import videoRoutes from "./routes/videoRoutes.js";
 
 dotenv.config();
