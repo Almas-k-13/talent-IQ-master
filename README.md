@@ -26,10 +26,10 @@ A premium full-stack web application built using the MERN stack with modern UI/U
 # 🌐 Live Demo
 
 ## 🔗 Frontend
-https://talent-iq-master.vercel.app/
+https://talent-iq-master-bay.vercel.app
 
 ## 🔗 Backend API
-https://talent-iq-master.onrender.com/
+https://talent-iq-master-fhoy.onrender.com
 
 ---
 
