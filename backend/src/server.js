@@ -57,12 +57,6 @@ app.use("/api/sessions", sessionRoutes);
 
 // ================= ROOT =================
 
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Backend Working 🚀",
-  });
-});
 
 // ================= 404 =================
 
