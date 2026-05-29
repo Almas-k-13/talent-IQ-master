@@ -1,6 +1,5 @@
 // src/lib/axios.js
 import axios from "axios";
-import { getToken } from "@clerk/clerk-react"; // Clerk token fetcher
 
 const axiosInstance = axios.create({
   baseURL: "https://talent-iq-master-fhoy.onrender.com/api",
@@ -12,23 +11,13 @@ const axiosInstance = axios.create({
 
 // REQUEST LOGGER
 axiosInstance.interceptors.request.use(
-  async (config) => {
-    try {
-      const token = await getToken({ template: "default" });
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-      }
-    } catch (err) {
-      console.error("Token fetch error:", err);
-    }
-
+  (config) => {
     console.log("🚀 REQUEST =>", {
       method: config.method,
       url: config.url,
       baseURL: config.baseURL,
       fullURL: `${config.baseURL}${config.url}`,
     });
-
     return config;
   },
   (error) => {
@@ -44,7 +33,6 @@ axiosInstance.interceptors.response.use(
       url: response.config.url,
       data: response.data,
     });
-
     return response;
   },
   (error) => {
@@ -52,9 +40,19 @@ axiosInstance.interceptors.response.use(
       url: error.config?.url,
       response: error.response?.data,
     });
-
     return Promise.reject(error);
   }
 );
 
 export default axiosInstance;
+
+/**
+ * Helper function to attach Clerk token manually.
+ * Call this inside your React components.
+ */
+export const attachAuthToken = async (axiosInstance, getToken) => {
+  const token = await getToken({ template: "default" });
+  if (token) {
+    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
+};
