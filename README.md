@@ -98,3 +98,6 @@ TalentIQ provides a complete environment for conducting technical interviews:
 ```env
 VITE_CLERK_PUBLISHABLE_KEY=YOUR_CLERK_KEY
 VITE_API_URL=YOUR_BACKEND_URL/api
+
+👨‍💻 Developer
+Almas Kureshi ✨
