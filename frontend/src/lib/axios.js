@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://talent-iq-backend-kflz.onrender.com/api",
+  baseURL: "https://talent-iq-master-fhoy.onrender.com/api",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
