@@ -99,5 +99,16 @@ TalentIQ provides a complete environment for conducting technical interviews:
 VITE_CLERK_PUBLISHABLE_KEY=YOUR_CLERK_KEY
 VITE_API_URL=YOUR_BACKEND_URL/api
 
+
+```
+
 👨‍💻 Developer
 Almas Kureshi ✨
+
+# ⚠️ Important Note
+
+👉 This project currently works **only in local development** using Clerk **test keys** (`pk_test`, `sk_test`).  
+- Local environment → ✅ Runs fine with test keys.  
+- Production deployment (Vercel + Render) → ❌ Does not work with test keys. Clerk requires **live keys** (`pk_live`, `sk_live`) and a production instance.  
+
+For interview/demo purposes, please run the project locally
